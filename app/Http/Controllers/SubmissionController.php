@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubmissionRequest;
+use App\Http\Resources\SubmissionResource;
 use App\Jobs\SubmissionJob;
+use App\Services\UtilService;
+use Illuminate\Http\JsonResponse;
 
 
 class SubmissionController extends Controller
 {
-    public function store(SubmissionRequest $request)
+    public function store(UtilService $utilService, SubmissionRequest $request): array
     {
         SubmissionJob::dispatch($request->validated());
-        return response()->json(['success' => 'Submission processed successfully'], 200);
+        return $utilService->makeResponse('Submission posted successfully');
 
     }
 }

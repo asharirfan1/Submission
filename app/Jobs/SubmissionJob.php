@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 class SubmissionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     private $data;
+
     /**
      * Create a new job instance.
      */
@@ -28,7 +30,7 @@ class SubmissionJob implements ShouldQueue
     public function handle(): void
     {
         $submission = Submission::create($this->data);
-        if (!$submission){
+        if (!$submission) {
             return;
         }
         SubmissionEvent::dispatch($submission);

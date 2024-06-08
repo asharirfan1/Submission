@@ -27,7 +27,5 @@ class SubmissionEventListener
             'email' => $event->submission->email,
             'message' => $event->submission->message,
         ]);
-
-
     }
 }
